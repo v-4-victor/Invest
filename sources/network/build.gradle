@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.v4victor.search'
+    namespace 'com.v4victor.network'
     compileSdk 33
 
     defaultConfig {
@@ -28,23 +28,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding true
-    }
 }
 kotlin {
     jvmToolchain(8)
 }
 dependencies {
     implementation(project(":sources:core"))
-    implementation(project(":sources:network"))
 
-    implementation("com.github.bumptech.glide:glide:$glideVersion")
-
-
-    //UI
-    implementation "com.google.android.material:material:$materialVersion"
-
-    // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$Viewmodel")
+    // Retrofit2
+    implementation("com.squareup.retrofit2:retrofit:$retrofit")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit")
 }

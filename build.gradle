@@ -21,4 +21,7 @@ ext {
     navigationFragmentKtxVersion = '2.5.3'
     navigationUiKtxVersion = '2.5.3'
     kotlinSerialization = '1.5.0'
+    glideVersion = '4.15.1'
+    Viewmodel = '2.6.1'
+    retrofit = '2.9.0'
 }

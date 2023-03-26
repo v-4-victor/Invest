@@ -16,3 +16,4 @@ rootProject.name = "Invest"
 include ':app'
 include ':sources:core'
 include ':sources:search'
+include ':sources:network'

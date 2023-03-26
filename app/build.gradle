@@ -47,13 +47,15 @@ kotlin {
 //}
 dependencies {
     implementation(project(":sources:core"))
+
     implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$junitAndroidVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    //UI
+    implementation "com.google.android.material:material:$materialVersion"
 
     //DI
     implementation "com.google.dagger:hilt-android:$hiltAndroidVersion"
