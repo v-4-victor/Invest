@@ -27,6 +27,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        viewBinding true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -47,6 +50,8 @@ kotlin {
 //}
 dependencies {
     implementation(project(":sources:core"))
+    implementation(project(":sources:websocket"))
+    implementation(project(":sources:search"))
 
     implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
@@ -56,6 +61,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
     //UI
     implementation "com.google.android.material:material:$materialVersion"
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
 
     //DI
     implementation "com.google.dagger:hilt-android:$hiltAndroidVersion"

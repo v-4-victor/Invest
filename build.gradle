@@ -2,18 +2,18 @@ plugins {
     id 'com.android.application' version '7.4.2' apply false
     id 'com.android.library' version '7.4.2' apply false
     id 'org.jetbrains.kotlin.android' version '1.8.10' apply false
-    id 'com.google.dagger.hilt.android' version '2.44' apply false
+    id 'com.google.dagger.hilt.android' version '2.45' apply false
     id 'com.google.devtools.ksp' version '1.8.10-1.0.9' apply false
     id 'org.jetbrains.kotlin.plugin.serialization' version '1.8.10' apply false
 
 }
 ext {
     coreKtxVersion = '1.9.0'
-    roomVersion = '2.5.0'
+    roomVersion = '2.5.1'
     appcompatVersion = '1.6.1'
     constraintlayoutVersion = '2.1.4'
     espressoCoreVersion = '3.5.1'
-    hiltAndroidVersion = '2.44'
+    hiltAndroidVersion = '2.45'
     junitVersion = '1.1.5'
     junitAndroidVersion = junitVersion
     junitVersion = '4.13.2'
@@ -24,4 +24,7 @@ ext {
     glideVersion = '4.15.1'
     Viewmodel = '2.6.1'
     retrofit = '2.9.0'
+    kotlinxSerializationJsonVersion = '1.5.0'
+    lifecycleLivedataKtxVersion = '2.6.1'
+    okhttpVersion = '5.0.0-alpha.11'
 }

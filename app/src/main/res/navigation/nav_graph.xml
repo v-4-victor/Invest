@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/stockingsFragment"
-        android:name="com.v4_victor.investing.stockings.StockingsFragment"
+        android:name="com.v4victor.invest.stockings.StockingsFragment"
         android:label="StockingsFragment"
         tools:layout="@layout/stocks_fragment">
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.v4_victor.search.SearchFragment"
+        android:name="com.v4victor.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/search_layout">
         <action

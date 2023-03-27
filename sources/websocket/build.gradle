@@ -1,10 +1,14 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+
+    id 'com.google.devtools.ksp'
+    id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
 android {
-    namespace 'com.v4victor.search'
+    namespace 'com.v4victor.websocket'
     compileSdk 33
 
     defaultConfig {
@@ -28,23 +32,24 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding true
-    }
 }
 kotlin {
     jvmToolchain(8)
 }
 dependencies {
     implementation(project(":sources:core"))
-    implementation(project(":sources:network"))
-    //Glide
-    implementation("com.github.bumptech.glide:glide:$glideVersion")
 
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp:$okhttpVersion")
 
-    //UI
-    implementation "com.google.android.material:material:$materialVersion"
+    // Core
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleLivedataKtxVersion")
 
-    // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$Viewmodel")
+    // DI
+    implementation("com.google.dagger:hilt-android:$hiltAndroidVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltAndroidVersion")
+
+    //KotlinX Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationJsonVersion")
+
 }

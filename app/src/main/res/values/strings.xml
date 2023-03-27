@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Investing</string>
+    <string name="app_name">Invest</string>
     <string name="stocks">Stocks</string>
     <string name="favourite">Favourite</string>
     <string name="search">Search</string>
