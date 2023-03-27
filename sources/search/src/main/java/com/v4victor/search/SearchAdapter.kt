@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-
 import com.v4victor.core.dto.SearchInfo
 import com.v4victor.search.databinding.SearchItemBinding
 
-class SearchAdapter : ListAdapter<SearchInfo, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
+class SearchAdapter(private val onItemClickListener: OnClickListener) :
+    ListAdapter<SearchInfo, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder.from(parent)
@@ -19,6 +19,10 @@ class SearchAdapter : ListAdapter<SearchInfo, RecyclerView.ViewHolder>(REPO_COMP
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val repoItem = getItem(position)
+        holder.itemView.setOnClickListener {
+            onItemClickListener.onClick(repoItem)
+        }
+
         if (repoItem != null) {
             (holder as ViewHolder).bind(repoItem)
         }
@@ -35,26 +39,14 @@ class SearchAdapter : ListAdapter<SearchInfo, RecyclerView.ViewHolder>(REPO_COMP
     }
 }
 
+class OnClickListener(val clickListener: (ticket: SearchInfo) -> Unit) {
+    fun onClick(ticket: SearchInfo) = clickListener(ticket)
+}
 class ViewHolder private constructor(
     private val binding: SearchItemBinding,
     val context: Context
 ) :
     RecyclerView.ViewHolder(binding.root) {
-    init {
-        binding.root.setOnClickListener {
-//            val data: ApiCompanyInfo = binding.pic?.companyInfo ?: ApiCompanyInfo("", "", "", "")
-//            binding.root.findNavController().navigate(
-//                SearchFragmentDirections.actionSearchFragmentToMainFragment(
-//                    Search(
-//                        data.description,
-//                        data.displaySymbol,
-//                        data.symbol
-//                    )
-//                )
-//            )
-        }
-    }
-
     fun bind(item: SearchInfo) {
         val url = "https://finnhub.io/api/logo?symbol=${item.symbol}"
         Glide.with(context)
@@ -62,6 +54,7 @@ class ViewHolder private constructor(
             .error(R.drawable.ic_broken)
             .into(binding.imageView)
         binding.symbol.text = item.symbol
+
     }
 
     companion object {
@@ -72,4 +65,5 @@ class ViewHolder private constructor(
             return ViewHolder(binding, parent.context)
         }
     }
+
 }

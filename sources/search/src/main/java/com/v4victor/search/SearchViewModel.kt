@@ -26,7 +26,7 @@ class SearchViewModel : ViewModel() {
     /**
      * Sets the value of the status LiveData to the Mars API status.
      */
-    fun getMarsRealEstateProperties(company: String) =
+    fun getTickets(company: String) =
         viewModelScope.launch {
             _status.value = MarsApiStatus.LOADING
             _response.value = "fds"

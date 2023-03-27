@@ -13,7 +13,7 @@ import com.v4victor.search.databinding.SearchLayoutBinding
 
 class SearchFragment : Fragment() {
 
-    val adapter = SearchAdapter()
+    private lateinit var adapter: SearchAdapter
     private lateinit var viewModel: SearchViewModel
     private lateinit var binder: SearchLayoutBinding
     override fun onCreateView(
@@ -22,7 +22,7 @@ class SearchFragment : Fragment() {
     ): View {
         binder = SearchLayoutBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-        viewModel.getMarsRealEstateProperties("")
+        viewModel.getTickets("")
         binder.recyclerTickers.adapter = adapter
 
         viewModel.properties.observe(viewLifecycleOwner)
@@ -55,18 +55,9 @@ class SearchFragment : Fragment() {
         binder.editTextTextPersonName.text.trim().let {
             if (it.isNotEmpty()) {
                 binder.recyclerTickers.scrollToPosition(0)
-                viewModel.getMarsRealEstateProperties(it.toString())
+                viewModel.getTickets(it.toString())
             }
         }
     }
 
-//    fun Fragment.hideKeyboard() {
-//        view?.let { activity?.hideKeyboard(it) }
-//    }
-//
-//    fun Context.hideKeyboard(view: View) {
-//        val inputMethodManager =
-//            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-//        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-//    }
 }
