@@ -59,9 +59,9 @@ class StockingsAdapter(
         if (payloads.isEmpty()) {
             super.onBindViewHolder(holder, position, payloads)
         } else {
-            if (payloads[0] is String) {
-                Log.d(TAG, payloads[0] as String)
-                (holder as ViewHolder).updatePrice(payloads[0] as String)
+            if (payloads[0] is Double) {
+                Log.d(TAG, payloads[0].toString())
+                (holder as ViewHolder).updatePrice(payloads[0].toString())
             }
         }
     }

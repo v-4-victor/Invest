@@ -9,9 +9,9 @@ import com.v4victor.network.StocksApi
 import kotlinx.coroutines.launch
 
 class SearchViewModel : ViewModel() {
-    enum class MarsApiStatus { LOADING, ERROR, DONE }
+    enum class ApiStatus { LOADING, ERROR, DONE }
 
-    private val _status = MutableLiveData<MarsApiStatus>()
+    private val _status = MutableLiveData<ApiStatus>()
 
 
     // The internal MutableLiveData String that stores the most recent response
@@ -28,16 +28,16 @@ class SearchViewModel : ViewModel() {
      */
     fun getTickets(company: String) =
         viewModelScope.launch {
-            _status.value = MarsApiStatus.LOADING
+            _status.value = ApiStatus.LOADING
             _response.value = "fds"
             try {
                 val list = StocksApi.retrofitService.getNames(company)
                 _properties.value = list.result
                 _response.value = "Success: Mars properties retrieved"
-                _status.value = MarsApiStatus.DONE
+                _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _response.value = e.message
-                _status.value = MarsApiStatus.ERROR
+                _status.value = ApiStatus.ERROR
                 _properties.value = ArrayList()
             }
 

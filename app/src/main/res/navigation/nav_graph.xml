@@ -13,7 +13,8 @@
         tools:layout="@layout/stocks_fragment">
         <action
             android:id="@+id/action_stockingsFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -23,5 +24,6 @@
         <action
             android:id="@+id/action_searchFragment_to_stockingsFragment"
             app:destination="@id/stockingsFragment" />
+
     </fragment>
 </navigation>

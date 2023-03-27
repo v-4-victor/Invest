@@ -9,9 +9,13 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.v4victor.search.databinding.SearchLayoutBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
+    @Inject
+    lateinit var navigateToStocksFragment: NavigateToStocksFragment
 
     private lateinit var adapter: SearchAdapter
     private lateinit var viewModel: SearchViewModel
@@ -23,6 +27,7 @@ class SearchFragment : Fragment() {
         binder = SearchLayoutBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         viewModel.getTickets("")
+        adapter = SearchAdapter(navigateToStocksFragment)
         binder.recyclerTickers.adapter = adapter
 
         viewModel.properties.observe(viewLifecycleOwner)

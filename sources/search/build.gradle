@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.dagger.hilt.android'
+
+    id 'kotlin-kapt'
 }
 
 android {
@@ -51,4 +54,8 @@ dependencies {
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationFragmentKtxVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationFragmentKtxVersion"
+
+    //DI
+    implementation "com.google.dagger:hilt-android:$hiltAndroidVersion"
+    kapt "com.google.dagger:hilt-compiler:$hiltAndroidVersion"
 }

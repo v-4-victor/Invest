@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.v4victor.core.dto.SearchInfo
 import com.v4victor.search.databinding.SearchItemBinding
 
-class SearchAdapter(private val onItemClickListener: OnClickListener) :
+class SearchAdapter(private val navigator: NavigateToStocksFragment) :
     ListAdapter<SearchInfo, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -20,7 +20,7 @@ class SearchAdapter(private val onItemClickListener: OnClickListener) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val repoItem = getItem(position)
         holder.itemView.setOnClickListener {
-            onItemClickListener.onClick(repoItem)
+            navigator.navigate(repoItem)
         }
 
         if (repoItem != null) {
@@ -39,9 +39,7 @@ class SearchAdapter(private val onItemClickListener: OnClickListener) :
     }
 }
 
-class OnClickListener(val clickListener: (ticket: SearchInfo) -> Unit) {
-    fun onClick(ticket: SearchInfo) = clickListener(ticket)
-}
+
 class ViewHolder private constructor(
     private val binding: SearchItemBinding,
     val context: Context
