@@ -11,21 +11,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
+import com.v4victor.invest.R
 import com.v4victor.invest.databinding.StocksFragmentBinding
+import com.v4victor.network.StocksApi
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class StockingsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = StockingsFragment()
-    }
-
     private val viewModel by viewModels<StockingsViewModel>()
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,14 +34,12 @@ class StockingsFragment : Fragment() {
 
         })
         recycler.adapter = adapter
-        adapter.submitList(viewModel.stocksList._list)
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED)
             {
                 viewModel._stocksFlow.collect {
                     Log.d(TAG, it.toString())
                     adapter.submitList(it.map { item -> item.copy() })
-
                 }
             }
         }

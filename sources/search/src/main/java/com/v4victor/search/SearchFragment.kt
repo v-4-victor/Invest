@@ -14,12 +14,12 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
-    @Inject
-    lateinit var navigateToStocksFragment: NavigateToStocksFragment
-
     private lateinit var adapter: SearchAdapter
     private lateinit var viewModel: SearchViewModel
     private lateinit var binder: SearchLayoutBinding
+
+    @Inject
+    lateinit var navigator: NavigateToStocksFragment
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,7 +27,7 @@ class SearchFragment : Fragment() {
         binder = SearchLayoutBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         viewModel.getTickets("")
-        adapter = SearchAdapter(navigateToStocksFragment)
+        adapter = SearchAdapter(navigator)
         binder.recyclerTickers.adapter = adapter
 
         viewModel.properties.observe(viewLifecycleOwner)

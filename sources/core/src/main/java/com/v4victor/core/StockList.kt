@@ -3,24 +3,22 @@ package com.v4victor.core
 import android.util.Log
 import com.v4victor.core.dto.CompanyProfile
 
-class StockList(list: List<CompanyProfile>) {
-    private val list = mutableListOf<CompanyProfile>()
+class StockList (private val list: MutableList<CompanyProfile> = mutableListOf()) {
     private val map = mutableMapOf<String, Int>()
     private val sortOrder = SortOrder.ASCENDING
 
     val _list: List<CompanyProfile> = list
     val _map: Map<String, Int> = map
 
-    init {
-        addAll(list)
-    }
 
     fun addAll(CompanyProfiles: List<CompanyProfile>) {
         list.addAll(CompanyProfiles)
         sortCompanyProfileList()
     }
-
-    fun add(CompanyProfile: CompanyProfile) {
+    fun isEmpty():Boolean {
+        return list.isEmpty()
+    }
+    operator fun plusAssign(CompanyProfile: CompanyProfile) {
         list.add(CompanyProfile)
         sortCompanyProfileList()
     }

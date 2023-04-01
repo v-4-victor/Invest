@@ -16,7 +16,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.*
 
 
-class Websocket(
+class WebSocketClient(
     private val stocks: List<String>,
     private val coroutineScope: CoroutineScope
 ) {

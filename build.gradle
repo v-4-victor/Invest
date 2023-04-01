@@ -27,4 +27,5 @@ ext {
     kotlinxSerializationJsonVersion = '1.5.0'
     lifecycleLivedataKtxVersion = '2.6.1'
     okhttpVersion = '5.0.0-alpha.11'
+    lifecycleRuntimeKtxVersion = '2.6.1'
 }

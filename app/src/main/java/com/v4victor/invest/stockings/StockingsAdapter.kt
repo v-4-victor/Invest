@@ -28,7 +28,7 @@ class StockingsAdapter(
                 .into(binding.imageView)
             binding.symbol.text = item.symbol
             binding.currentPrice.text = item.currentPrice.toString()
-            binding.companyName.text = item.companyName
+            binding.description.text = item.description
             binding.openPrice.text = item.openPrice.toString()
         }
 

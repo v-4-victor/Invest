@@ -19,13 +19,7 @@ class SearchViewModel : ViewModel() {
     private val _properties = MutableLiveData<List<SearchInfo>>()
     val properties: LiveData<List<SearchInfo>>
         get() = _properties
-    /**l
-     * Call getMarsRealEstateProperties() on init so we can display status immediately.
-     */
 
-    /**
-     * Sets the value of the status LiveData to the Mars API status.
-     */
     fun getTickets(company: String) =
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
@@ -33,7 +27,7 @@ class SearchViewModel : ViewModel() {
             try {
                 val list = StocksApi.retrofitService.getNames(company)
                 _properties.value = list.result
-                _response.value = "Success: Mars properties retrieved"
+                _response.value = "Success: Stocks retrieved"
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _response.value = e.message

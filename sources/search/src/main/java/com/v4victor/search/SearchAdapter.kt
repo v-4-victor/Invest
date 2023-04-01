@@ -31,10 +31,10 @@ class SearchAdapter(private val navigator: NavigateToStocksFragment) :
     companion object {
         private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<SearchInfo>() {
             override fun areItemsTheSame(oldItem: SearchInfo, newItem: SearchInfo): Boolean =
-                oldItem.companyName == newItem.companyName
+                oldItem.symbol == newItem.symbol
 
             override fun areContentsTheSame(oldItem: SearchInfo, newItem: SearchInfo): Boolean =
-                oldItem.companyName == newItem.companyName && oldItem.description == newItem.description
+                oldItem.symbol == newItem.symbol && oldItem.description == newItem.description
         }
     }
 }
@@ -52,6 +52,7 @@ class ViewHolder private constructor(
             .error(R.drawable.ic_broken)
             .into(binding.imageView)
         binding.symbol.text = item.symbol
+        binding.description.text = item.description
 
     }
 

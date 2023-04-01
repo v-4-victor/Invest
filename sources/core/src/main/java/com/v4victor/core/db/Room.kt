@@ -1,4 +1,4 @@
-package com.v4victor.invest.db
+package com.v4victor.core.db
 
 import android.content.Context
 import androidx.room.*
@@ -12,14 +12,18 @@ interface CompanyDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(companies: List<CompanyProfile>)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insert(company: CompanyProfile)
+
     @Query("delete from CompanyProfile where symbol = :symbol")
     fun clear(symbol: String)
+
     @Query("delete from CompanyProfile")
     fun clear()
 }
 
 
-@Database(entities = [CompanyProfile::class], version = 1)
+@Database(entities = [CompanyProfile::class], version = 3)
 abstract class CompanyDB : RoomDatabase() {
     abstract val companyDao: CompanyDao
 }
