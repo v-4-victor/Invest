@@ -2,9 +2,11 @@ package com.v4victor.invest.di
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.v4victor.core.StockList
 import com.v4victor.core.db.Repository
+import com.v4victor.core.dto.CompanyProfile
 import com.v4victor.invest.MainActivity
 import com.v4victor.invest.R
 import com.v4victor.invest.navigation.NavigateToStocksFragmentImpl
@@ -23,8 +25,9 @@ object FragmentModule {
     fun provideNavigation(
         activity: Activity,
         repository: Repository,
-        stockList: StockList
+        stockList: MutableLiveData<StockList>
     ): NavigateToStocksFragment {
         return NavigateToStocksFragmentImpl(activity, repository, stockList)
     }
+
 }

@@ -3,6 +3,7 @@ package com.v4victor.chart
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,17 +17,24 @@ import com.github.mikephil.charting.data.CandleDataSet
 import com.github.mikephil.charting.data.CandleEntry
 import com.v4victor.chart.databinding.ChartFragmentBinding
 import com.v4victor.core.dto.Chart
+import com.v4victor.core.dto.StringHolder
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class ChartFragment(private val company: String) : Fragment() {
+class ChartFragment: Fragment() {
+    @Inject
+    lateinit var stringHolder: StringHolder
     private lateinit var viewModel: ChartViewModel
     private lateinit var binding: ChartFragmentBinding
+    private lateinit var company:String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = ChartFragmentBinding.inflate(inflater)
+        company = stringHolder.data
+        Log.d("Chart", company)
         viewModel = ViewModelProvider(this)[ChartViewModel::class.java]
         viewModel.properties.observe(viewLifecycleOwner)
         {

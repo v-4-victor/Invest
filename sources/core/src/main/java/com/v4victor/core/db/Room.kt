@@ -23,7 +23,7 @@ interface CompanyDao {
 }
 
 
-@Database(entities = [CompanyProfile::class], version = 3)
+@Database(entities = [CompanyProfile::class], version = 4)
 abstract class CompanyDB : RoomDatabase() {
     abstract val companyDao: CompanyDao
 }

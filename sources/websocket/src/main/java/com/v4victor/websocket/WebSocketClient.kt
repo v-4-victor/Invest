@@ -1,6 +1,8 @@
 package com.v4victor.websocket
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.v4victor.core.TOKEN
 import com.v4victor.core.dto.*
 
@@ -23,7 +25,10 @@ class WebSocketClient(
     private val okHttpClient = OkHttpClient()
     private lateinit var ws: WebSocket
     private val flow = MutableStateFlow(Result(listOf(Data())))
+    private val liveData = MutableLiveData(Result(listOf()))
+
     val _flow: StateFlow<Result> = flow
+    val _liveData: LiveData<Result> = liveData
     val json = Json { ignoreUnknownKeys = true }
 
 
@@ -34,7 +39,7 @@ class WebSocketClient(
             .build()
         ws = okHttpClient.newWebSocket(request, object : WebSocketListener() {
             override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
-                unsubscribe(webSocket)
+//                unsubscribe(webSocket)
             }
 
             override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
@@ -42,14 +47,14 @@ class WebSocketClient(
             }
 
             override fun onMessage(webSocket: WebSocket, text: String) {
-                //TODO: flow to RecyclerView
                 coroutineScope.launch {
                     withContext(Dispatchers.IO)
                     {
                         try {
-                            val result = json.decodeFromString<Result>(text)
                             Log.e(TAG, "Thread: " + Thread.currentThread().name)
+                            val result = json.decodeFromString<Result>(text)
                             flow.emit(result)
+//                            liveData.value = result
                         } catch (e: SerializationException) {
                             Log.e(TAG, "SerializationException ${e.message}")
                         }
