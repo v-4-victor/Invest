@@ -2,6 +2,8 @@ package com.v4victor.invest.stockings
 
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.v4victor.core.StockList
@@ -28,6 +30,8 @@ class StockingsViewModel @Inject constructor(
         MutableSharedFlow(1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
     val _stocksFlow: SharedFlow<List<CompanyProfile>> = stocksFlow
 
+    private val stocksList = MutableLiveData<List<CompanyProfile>>()
+    val _stocksList: LiveData<List<CompanyProfile>> = stocksList
 
     val defaultStocksList =
         listOf(

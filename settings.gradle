@@ -10,6 +10,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
+
     }
 }
 rootProject.name = "Invest"
@@ -18,3 +20,4 @@ include ':sources:core'
 include ':sources:search'
 include ':sources:network'
 include ':sources:websocket'
+include ':sources:chart'

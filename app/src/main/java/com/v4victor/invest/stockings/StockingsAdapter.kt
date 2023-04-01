@@ -60,7 +60,6 @@ class StockingsAdapter(
             super.onBindViewHolder(holder, position, payloads)
         } else {
             if (payloads[0] is Double) {
-                Log.d(TAG, payloads[0].toString())
                 (holder as ViewHolder).updatePrice(payloads[0].toString())
             }
         }
@@ -77,23 +76,17 @@ class StockingsAdapter(
     }
 
     companion object {
-        val TAG = "StockingsAdapter"
 
         private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<CompanyProfile>() {
             override fun areItemsTheSame(oldItem: CompanyProfile, newItem: CompanyProfile): Boolean {
-                Log.d(TAG, "itemsTheSame: ${oldItem.currentPrice}  ${newItem.currentPrice}")
-
                 return oldItem.symbol == newItem.symbol
             }
 
             override fun areContentsTheSame(oldItem: CompanyProfile, newItem: CompanyProfile): Boolean {
-                Log.d(TAG, "contentsTheSame: ${oldItem.currentPrice}  ${newItem.currentPrice}")
-
                 return oldItem.currentPrice == newItem.currentPrice
             }
 
             override fun getChangePayload(oldItem: CompanyProfile, newItem: CompanyProfile): Any {
-                Log.d(TAG, "changePayload: ${oldItem.currentPrice}  ${newItem.currentPrice}")
                 return newItem.currentPrice
             }
         }

@@ -1,6 +1,5 @@
 package com.v4victor.invest.stockings
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,10 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.navGraphViewModels
-import com.v4victor.invest.R
 import com.v4victor.invest.databinding.StocksFragmentBinding
-import com.v4victor.network.StocksApi
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

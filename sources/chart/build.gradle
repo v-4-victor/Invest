@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.v4victor.search'
+    namespace 'com.v4victor.chart'
     compileSdk 33
 
     defaultConfig {
@@ -24,15 +24,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        viewBinding true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-    buildFeatures {
-        viewBinding true
     }
 }
 kotlin {
@@ -41,21 +41,27 @@ kotlin {
 dependencies {
     implementation(project(":sources:core"))
     implementation(project(":sources:network"))
-    //Glide
-    implementation("com.github.bumptech.glide:glide:$glideVersion")
 
-
-    //UI
-    implementation "com.google.android.material:material:$materialVersion"
-
-    // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$Viewmodel")
-
-    // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigationFragmentKtxVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigationFragmentKtxVersion"
+    //Core
+    implementation "androidx.core:core-ktx:$coreKtxVersion"
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
 
     //DI
     implementation "com.google.dagger:hilt-android:$hiltAndroidVersion"
     kapt "com.google.dagger:hilt-compiler:$hiltAndroidVersion"
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$Viewmodel")
+
+    //UI
+    implementation "com.google.android.material:material:$materialVersion"
+
+    //Chart
+    implementation "com.github.PhilJay:MPAndroidChart:$chartVersion"
+
+    //Test
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$junitAndroidVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+
 }

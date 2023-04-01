@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":sources:websocket"))
     implementation(project(":sources:search"))
     implementation(project(":sources:network"))
+
     //Core
     implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
@@ -80,5 +81,6 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
     ksp "androidx.room:room-compiler:$roomVersion"
 
+    //CoroutineLifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleRuntimeKtxVersion")
 }

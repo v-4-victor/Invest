@@ -25,7 +25,6 @@ object FragmentModule {
         repository: Repository,
         stockList: StockList
     ): NavigateToStocksFragment {
-
         return NavigateToStocksFragmentImpl(activity, repository, stockList)
     }
 }
