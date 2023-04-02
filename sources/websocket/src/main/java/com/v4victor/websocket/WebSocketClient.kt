@@ -51,7 +51,7 @@ class WebSocketClient(
                     withContext(Dispatchers.IO)
                     {
                         try {
-                            Log.e(TAG, "Thread: " + Thread.currentThread().name)
+                            Log.d(TAG, "Thread: " + Thread.currentThread().name)
                             val result = json.decodeFromString<Result>(text)
                             flow.emit(result)
 //                            liveData.value = result
@@ -63,7 +63,7 @@ class WebSocketClient(
             }
 
             override fun onOpen(webSocket: WebSocket, response: Response) {
-                Log.e(TAG, "onOpen ${stocks.joinToString { "$it " }}")
+                Log.d(TAG, "onOpen ${stocks.joinToString { "$it " }}")
                 subscribe(webSocket)
             }
         })
@@ -77,8 +77,8 @@ class WebSocketClient(
         stocks.forEach { webSocket.send("{\"type\":\"subscribe\",\"symbol\":\"$it\"}") }
     }
 
-    fun unsubscribe(webSocket: WebSocket) {
-        webSocket.send(
+    fun unsubscribe() {
+        ws.send(
             "{\n" +
                     "    \"type\": \"unsubscribe\",\n" +
                     "    \"channels\": [\"ticker\"]\n" +

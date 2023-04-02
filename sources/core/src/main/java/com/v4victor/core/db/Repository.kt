@@ -19,9 +19,9 @@ class Repository(database: CompanyDB) {
             dao.insert(company)
         }
     }
-    suspend fun delete(set: String) {
+    suspend fun delete(symbol: String) {
         withContext(Dispatchers.IO) {
-            dao.clear(set)
+            dao.clear(symbol)
         }
     }
 

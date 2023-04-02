@@ -1,7 +1,6 @@
 package com.v4victor.invest.stockings
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -16,8 +15,8 @@ class StockingsAdapter(
     private val onClickListener: OnClickListener
 ) : ListAdapter<CompanyProfile, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
     class ViewHolder private constructor(
-        private val binding: ListItemBinding,
-        val context: Context
+         val binding: ListItemBinding,
+        private val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CompanyProfile) {
