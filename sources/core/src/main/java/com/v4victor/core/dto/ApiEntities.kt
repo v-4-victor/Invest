@@ -3,13 +3,13 @@ package com.v4victor.core.dto
 import android.util.Log
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable
 data class PriceInfo(
-     val o: Double,
-     val c: Double,
+    @SerializedName("o") val openPrice: Double,
+    @SerializedName("c") val currentPrice: Double
 )
 
 @Entity
@@ -31,8 +31,8 @@ data class CompanyProfile(
 
     operator fun plusAssign(priceInfo: PriceInfo) {
         Log.d("Price", priceInfo.toString())
-        openPrice = priceInfo.o
-        currentPrice = priceInfo.c
+        openPrice = priceInfo.openPrice
+        currentPrice = priceInfo.currentPrice
     }
 }
 
