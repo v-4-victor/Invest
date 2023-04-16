@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/stocks"
+        android:icon="@drawable/main_list"
+        android:title="@string/stocks"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/favourite_list"
+        android:icon="@drawable/star_list_no_focus"
+        android:title="@string/favourite"
+        app:showAsAction="ifRoom" />
+</menu>

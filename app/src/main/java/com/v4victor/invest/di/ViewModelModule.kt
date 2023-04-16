@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.v4victor.core.StockList
 import com.v4victor.core.dto.CompanyProfile
+import com.v4victor.core.dto.CompanyProfileHolder
 import com.v4victor.core.dto.SearchInfo
 import com.v4victor.core.dto.StringHolder
 import dagger.Binds
@@ -24,8 +25,8 @@ class ViewModelModule {
     @ActivityRetainedScoped
     @Provides
     fun provideCompanyProfile(
-    ): StringHolder {
-        return StringHolder()
+    ): CompanyProfileHolder {
+        return CompanyProfileHolder()
     }
 }
 

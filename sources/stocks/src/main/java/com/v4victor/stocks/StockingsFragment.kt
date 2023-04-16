@@ -1,4 +1,4 @@
-package com.v4victor.invest.stockings
+package com.v4victor.stocks
 
 import android.os.Bundle
 import android.util.Log
@@ -7,19 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.v4victor.core.dto.CompanyProfile
+import com.v4victor.core.dto.CompanyProfileHolder
 import com.v4victor.core.dto.StringHolder
-import com.v4victor.invest.R
-import com.v4victor.invest.databinding.StocksFragmentBinding
+import com.v4victor.stocks.databinding.StocksFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class StockingsFragment : Fragment() {
     @Inject
-    lateinit var stringHolder: StringHolder
+    lateinit var companyProfileHolder: CompanyProfileHolder
+    @Inject
+    lateinit var navigator: NavigateToChartFragment
+
     private val viewModel by viewModels<StockingsViewModel>()
     private lateinit var mIth: ItemTouchHelper
 
@@ -31,8 +34,8 @@ class StockingsFragment : Fragment() {
         val binding = StocksFragmentBinding.inflate(inflater)
         val recycler = binding.recycler
         val adapter = StockingsAdapter(StockingsAdapter.OnClickListener {
-            stringHolder.data = it.symbol
-            findNavController().navigate(R.id.action_stockingsFragment_to_chartFragment)
+            companyProfileHolder.companyProfile = viewModel.getCompanyProfile(it.symbol)!!
+            navigator.navigate()
         })
         recycler.adapter = adapter
 
@@ -58,9 +61,10 @@ class StockingsFragment : Fragment() {
 
         viewModel.stocksLiveList.observe(viewLifecycleOwner)
         {
-            Log.d(TAG, it.toString())
+            Log.d(TAG, it._list.toString())
             adapter.submitList(it._list.map { item -> item.copy() })
         }
+        viewModel.updateStocks()
         return binding.root
     }
 

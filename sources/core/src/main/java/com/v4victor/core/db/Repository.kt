@@ -14,11 +14,13 @@ class Repository(database: CompanyDB) {
             dao.insertAll(listCompany)
         }
     }
+
     suspend fun insert(company: CompanyProfile) {
         withContext(Dispatchers.IO) {
             dao.insert(company)
         }
     }
+
     suspend fun delete(symbol: String) {
         withContext(Dispatchers.IO) {
             dao.clear(symbol)
@@ -29,6 +31,13 @@ class Repository(database: CompanyDB) {
         withContext(Dispatchers.IO)
         {
             dao.clear()
+        }
+    }
+
+    suspend fun updateAll(profiles: List<CompanyProfile>) {
+        withContext(Dispatchers.IO)
+        {
+            dao.updateAll(profiles)
         }
     }
 

@@ -12,6 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/star_list_focus" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/imageCard"
             android:layout_width="wrap_content"
@@ -30,6 +39,7 @@
                 android:layout_height="80dp"
                 android:contentDescription="@string/app_name"
                 tools:srcCompat="@tools:sample/avatars" />
+
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -49,7 +59,7 @@
             app:layout_constraintStart_toEndOf="@+id/imageCard"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="BINANCE:BTCUSDT" />
+            tools:text="BINANCE" />
 
         <TextView
             android:id="@+id/description"

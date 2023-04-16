@@ -1,16 +1,16 @@
-package com.v4victor.invest.stockings
+package com.v4victor.stocks
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.v4victor.core.dto.CompanyProfile
 import com.v4victor.core.formatPrice
-import com.v4victor.invest.R
-import com.v4victor.invest.databinding.ListItemBinding
+import com.v4victor.stocks.databinding.ListItemBinding
 
 class StockingsAdapter(
     private val onClickListener: OnClickListener
@@ -30,6 +30,7 @@ class StockingsAdapter(
             binding.currentPrice.text = item.currentPrice.formatPrice()
             binding.description.text = item.description
             binding.openPrice.text = item.openPrice.formatPrice()
+            binding.star.isVisible = item.favourite
         }
 
         fun updatePrice(price: Double) {
@@ -89,7 +90,7 @@ class StockingsAdapter(
                 oldItem: CompanyProfile,
                 newItem: CompanyProfile
             ): Boolean {
-                return oldItem.currentPrice == newItem.currentPrice
+                return oldItem.currentPrice == newItem.currentPrice && oldItem.favourite == newItem.favourite
             }
 
             override fun getChangePayload(oldItem: CompanyProfile, newItem: CompanyProfile): Any {

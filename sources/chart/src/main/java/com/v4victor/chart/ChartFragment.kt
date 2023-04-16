@@ -17,6 +17,7 @@ import com.github.mikephil.charting.data.CandleDataSet
 import com.github.mikephil.charting.data.CandleEntry
 import com.v4victor.chart.databinding.ChartFragmentBinding
 import com.v4victor.core.dto.Chart
+import com.v4victor.core.dto.CompanyProfileHolder
 import com.v4victor.core.dto.StringHolder
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -24,7 +25,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ChartFragment: Fragment() {
     @Inject
-    lateinit var stringHolder: StringHolder
+    lateinit var companyProfileHolder: CompanyProfileHolder
+    private val companyProfile by lazy { companyProfileHolder.companyProfile }
     private lateinit var viewModel: ChartViewModel
     private lateinit var binding: ChartFragmentBinding
     private lateinit var company:String
@@ -33,9 +35,8 @@ class ChartFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = ChartFragmentBinding.inflate(inflater)
+        company = companyProfile.symbol
 
-        company = stringHolder.data
-        Log.d("Chart", company)
 
         viewModel = ViewModelProvider(this)[ChartViewModel::class.java]
         viewModel.properties.observe(viewLifecycleOwner)
@@ -57,15 +58,23 @@ class ChartFragment: Fragment() {
                 binding.progressBar.visibility = View.INVISIBLE
             }
         }
+        binding.favouriteButton.setImageResource(icon(companyProfile))
         binding.day.setOnClickListener { viewModel.getChartData(company, "D") }
         binding.week.setOnClickListener { viewModel.getChartData(company, "W") }
         binding.month.setOnClickListener { viewModel.getChartData(company, "M") }
         binding.halfYear.setOnClickListener { viewModel.getChartData(company, "6M") }
         binding.year.setOnClickListener { viewModel.getChartData(company, "Y") }
+        binding.favouriteButton.setOnClickListener {
+            Log.d("Chart", companyProfile.toString())
+            companyProfile.favourite = !companyProfile.favourite
+            binding.favouriteButton.setImageResource(icon(companyProfile))
+        }
         viewModel.getChartData(
             company,
             "Y"
         )
+
+        Log.d("Chart", company)
         return binding.root
     }
 

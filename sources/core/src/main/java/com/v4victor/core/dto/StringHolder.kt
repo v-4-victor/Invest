@@ -4,3 +4,7 @@ class StringHolder
 {
     var data = ""
 }
+class CompanyProfileHolder
+{
+    var companyProfile = CompanyProfile("", "")
+}

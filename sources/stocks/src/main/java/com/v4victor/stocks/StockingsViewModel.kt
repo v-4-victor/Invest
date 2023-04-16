@@ -1,4 +1,4 @@
-package com.v4victor.invest.stockings
+package com.v4victor.stocks
 
 
 import android.util.Log
@@ -13,6 +13,7 @@ import com.v4victor.websocket.WebSocketClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -48,6 +49,7 @@ class StockingsViewModel @Inject constructor(
                                 defaultStocksList
                             })
                         }
+                else Log.d(TAG, "List not Empty ${stockList._list}")
                 ws =
                     WebSocketClient(
                         stockList._map.keys.toList(),
@@ -79,6 +81,22 @@ class StockingsViewModel @Inject constructor(
             stocksLiveList.updateValue()
         }
 
+    }
+
+    fun updateStocks() {
+        viewModelScope.launch {
+            stocksLiveList.value?.let { stockList ->
+                if (!stockList.isEmpty())
+                    launch { repository.updateAll(stockList._list) }
+            }
+        }
+    }
+
+    fun getCompanyProfile(symbol: String): CompanyProfile? {
+        stocksLiveList.value?.let {
+            return it.getProfile(symbol)
+        }
+        return null
     }
 
 }

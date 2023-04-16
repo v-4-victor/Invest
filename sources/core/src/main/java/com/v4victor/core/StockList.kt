@@ -36,6 +36,9 @@ class StockList(private val list: MutableList<CompanyProfile> = mutableListOf())
             list[map[ticket]!!].currentPrice = price
     }
 
+    fun getProfile(symbol: String) = if (map[symbol] != null)
+        list[map[symbol]!!] else null
+
     private fun sortCompanyProfileList() {
         when (sortOrder) {
             SortOrder.ASCENDING -> list.sortBy { it.symbol }

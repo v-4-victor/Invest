@@ -50,10 +50,10 @@ kotlin {
 //}
 dependencies {
     implementation(project(":sources:core"))
-    implementation(project(":sources:websocket"))
     implementation(project(":sources:search"))
     implementation(project(":sources:network"))
     implementation(project(":sources:chart"))
+    implementation(project(":sources:stocks"))
 
     //Core
     implementation "androidx.core:core-ktx:$coreKtxVersion"
