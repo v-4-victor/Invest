@@ -1,15 +1,14 @@
 package com.v4victor.core.dto
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
+//@Serializable
 data class Chart(
-    @SerialName("o") val openPrice: List<Double>,
-    @SerialName("h") val highPrice: List<Double>,
-    @SerialName("l") val lowPrice: List<Double>,
-    @SerialName("c") val closePrice: List<Double>,
-    @SerialName("t") val time: List<Long>
+    @SerializedName("o") val openPrice: List<Double>,
+    @SerializedName("h") val highPrice: List<Double>,
+    @SerializedName("l") val lowPrice: List<Double>,
+    @SerializedName("c") val closePrice: List<Double>,
+    @SerializedName("t") val time: List<Long>
 )
 //@Serializable
 //data class Chart(
