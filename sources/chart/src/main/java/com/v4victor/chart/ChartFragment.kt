@@ -70,8 +70,7 @@ class ChartFragment: Fragment() {
     }
 
     private fun initChart(chart: CandleStickChart, data: Chart) {
-        chart.setBackgroundColor(Color.WHITE)
-
+        chart.setBackgroundColor(Color.TRANSPARENT)
         chart.description.isEnabled = false
 
         // if more than 60 entries are displayed in the chart, no values will be
@@ -101,7 +100,7 @@ class ChartFragment: Fragment() {
         setData(chart, data)
         chart.legend.isEnabled = false
 
-        chart.animateY(1000)
+//        chart.animateY(1000)
         chart.invalidate()
     }
 
@@ -131,7 +130,7 @@ class ChartFragment: Fragment() {
             decreasingColor = Color.rgb(255, 0, 0)
             decreasingPaintStyle = Paint.Style.FILL
             increasingColor = Color.rgb(122, 242, 84)
-            increasingPaintStyle = Paint.Style.STROKE
+            increasingPaintStyle = Paint.Style.FILL
             neutralColor = Color.BLUE
         }
 

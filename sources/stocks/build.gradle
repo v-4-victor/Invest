@@ -1,13 +1,12 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-
     id 'com.google.dagger.hilt.android'
     id 'kotlin-kapt'
 }
 
 android {
-    namespace 'com.v4victor.search'
+    namespace 'com.v4victor.stocks'
     compileSdk 33
 
     defaultConfig {
@@ -38,7 +37,9 @@ android {
 kotlin {
     jvmToolchain(8)
 }
+
 dependencies {
+
     implementation(project(":sources:core"))
     implementation(project(":sources:network"))
     //Glide

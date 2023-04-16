@@ -38,9 +38,6 @@ class WebSocketClient(
             .url(WEB_SOCKET_URL)
             .build()
         ws = okHttpClient.newWebSocket(request, object : WebSocketListener() {
-            override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
-//                unsubscribe(webSocket)
-            }
 
             override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
                 Log.e(TAG, "onError: ${t.message}")

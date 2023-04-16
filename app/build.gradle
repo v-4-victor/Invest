@@ -62,15 +62,17 @@ dependencies {
 
     //Test
     testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "androidx.test.ext:junit:$junitAndroidVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
-
+    androidTestImplementation 'androidx.test.ext:junit:1.2.0-alpha01'
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.6.0-alpha01"
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.4.1'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso-allure-support:1.4.1'
     //UI
     implementation "com.google.android.material:material:$materialVersion"
     implementation("com.github.bumptech.glide:glide:$glideVersion")
 
     //DI
     implementation "com.google.dagger:hilt-android:$hiltAndroidVersion"
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.6.0-alpha01'
     kapt "com.google.dagger:hilt-compiler:$hiltAndroidVersion"
 
     // Navigation
@@ -84,4 +86,6 @@ dependencies {
 
     //CoroutineLifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleRuntimeKtxVersion")
+
+
 }
