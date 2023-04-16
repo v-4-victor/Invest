@@ -3,6 +3,6 @@
     <string name="app_name">Invest</string>
     <string name="enter_text">Enter ticker or name of company</string>
     <string name="stocks">Stocks</string>
-    <string name="favourite">Favourite</string>
+    <string name="favourite">News</string>
     <string name="search">Search</string>
 </resources>

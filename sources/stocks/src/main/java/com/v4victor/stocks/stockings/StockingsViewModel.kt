@@ -1,4 +1,4 @@
-package com.v4victor.stocks
+package com.v4victor.stocks.stockings
 
 
 import android.util.Log
@@ -13,7 +13,6 @@ import com.v4victor.websocket.WebSocketClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -39,8 +38,7 @@ class StockingsViewModel @Inject constructor(
 
             stocksLiveList.value?.let { stockList ->
                 if (stockList.isEmpty())
-                    repository.getCompanies()
-                        .let { repositoryList ->
+                    repository.getCompanies().let { repositoryList ->
                             stockList.addAll(repositoryList.ifEmpty {
                                 withContext(Dispatchers.Default)
                                 {
@@ -87,7 +85,7 @@ class StockingsViewModel @Inject constructor(
         viewModelScope.launch {
             stocksLiveList.value?.let { stockList ->
                 if (!stockList.isEmpty())
-                    launch { repository.updateAll(stockList._list) }
+                    repository.updateAll(stockList._list)
             }
         }
     }

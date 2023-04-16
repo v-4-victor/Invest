@@ -1,4 +1,4 @@
-package com.v4victor.stocks
+package com.v4victor.stocks.stockings
 
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.v4victor.core.dto.CompanyProfile
 import com.v4victor.core.dto.CompanyProfileHolder
-import com.v4victor.core.dto.StringHolder
+import com.v4victor.core.updateValue
+import com.v4victor.stocks.NavigateStocks
+import com.v4victor.stocks.R
 import com.v4victor.stocks.databinding.StocksFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -20,10 +21,13 @@ import javax.inject.Inject
 class StockingsFragment : Fragment() {
     @Inject
     lateinit var companyProfileHolder: CompanyProfileHolder
+
     @Inject
-    lateinit var navigator: NavigateToChartFragment
+    lateinit var navigator: NavigateStocks
+
 
     private val viewModel by viewModels<StockingsViewModel>()
+    private var favourite = false
     private lateinit var mIth: ItemTouchHelper
 
     override fun onCreateView(
@@ -35,7 +39,7 @@ class StockingsFragment : Fragment() {
         val recycler = binding.recycler
         val adapter = StockingsAdapter(StockingsAdapter.OnClickListener {
             companyProfileHolder.companyProfile = viewModel.getCompanyProfile(it.symbol)!!
-            navigator.navigate()
+            navigator.navigateToChart()
         })
         recycler.adapter = adapter
 
@@ -62,9 +66,29 @@ class StockingsFragment : Fragment() {
         viewModel.stocksLiveList.observe(viewLifecycleOwner)
         {
             Log.d(TAG, it._list.toString())
-            adapter.submitList(it._list.map { item -> item.copy() })
+            if (!favourite)
+                adapter.submitList(it._list.map { item -> item.copy() })
+            else
+                adapter.submitList(it._list.filter { item -> item.favourite }.map { item -> item.copy() })
+
         }
         viewModel.updateStocks()
+
+        binding.materialToolbar.setOnMenuItemClickListener {
+            if (it.itemId == R.id.search) {
+                navigator.navigateToSearch()
+                return@setOnMenuItemClickListener true
+            }
+            if (it.itemId == R.id.favourite) {
+                favourite = !favourite
+                val icon =
+                    if (favourite) R.drawable.star_list_focus else R.drawable.star_list_no_focus
+                it.setIcon(icon)
+                viewModel.stocksLiveList.updateValue()
+                return@setOnMenuItemClickListener true
+            }
+            false
+        }
         return binding.root
     }
 

@@ -12,18 +12,18 @@ import com.v4victor.core.dto.SearchInfo
 import com.v4victor.core.updateValue
 import com.v4victor.invest.R
 import com.v4victor.network.StocksApi
-import com.v4victor.search.NavigateToStocksFragment
+import com.v4victor.search.NavigateSearch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class NavigateToStocksFragmentImpl @Inject constructor(
+class NavigateSearchImpl @Inject constructor(
     private val activity: Activity,
     private val repository: Repository,
     private val companyList: MutableLiveData<StockList>
-) : NavigateToStocksFragment {
-    override fun navigate(ticket: SearchInfo) {
+) : NavigateSearch {
+    override fun navigateToStocks(ticket: SearchInfo) {
         activity as AppCompatActivity
         activity.lifecycleScope.launch {
             withContext(Dispatchers.Default)

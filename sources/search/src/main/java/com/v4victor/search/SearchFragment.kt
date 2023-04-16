@@ -19,7 +19,7 @@ class SearchFragment : Fragment() {
     private lateinit var binder: SearchLayoutBinding
 
     @Inject
-    lateinit var navigator: NavigateToStocksFragment
+    lateinit var navigator: NavigateSearch
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

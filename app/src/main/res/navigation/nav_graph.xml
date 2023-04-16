@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/stockingsFragment"
-        android:name="com.v4victor.stocks.StockingsFragment"
+        android:name="com.v4victor.stocks.stockings.StockingsFragment"
         android:label="StockingsFragment"
         tools:layout="@layout/stocks_fragment">
         <action

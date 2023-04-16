@@ -4,10 +4,10 @@ import android.app.Activity
 import androidx.lifecycle.MutableLiveData
 import com.v4victor.core.StockList
 import com.v4victor.core.db.Repository
-import com.v4victor.invest.navigation.NavigateToChartFragmentImpl
-import com.v4victor.invest.navigation.NavigateToStocksFragmentImpl
-import com.v4victor.search.NavigateToStocksFragment
-import com.v4victor.stocks.NavigateToChartFragment
+import com.v4victor.invest.navigation.NavigateStocksImpl
+import com.v4victor.invest.navigation.NavigateSearchImpl
+import com.v4victor.search.NavigateSearch
+import com.v4victor.stocks.NavigateStocks
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,14 +22,15 @@ object FragmentModule {
         activity: Activity,
         repository: Repository,
         stockList: MutableLiveData<StockList>
-    ): NavigateToStocksFragment {
-        return NavigateToStocksFragmentImpl(activity, repository, stockList)
+    ): NavigateSearch {
+        return NavigateSearchImpl(activity, repository, stockList)
     }
 
     @Provides
     fun provideNavigationToChart(
         activity: Activity
-    ): NavigateToChartFragment {
-        return NavigateToChartFragmentImpl(activity)
+    ): NavigateStocks {
+        return NavigateStocksImpl(activity)
     }
+
 }

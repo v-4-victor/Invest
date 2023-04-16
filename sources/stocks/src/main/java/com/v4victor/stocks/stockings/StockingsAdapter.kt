@@ -1,4 +1,4 @@
-package com.v4victor.stocks
+package com.v4victor.stocks.stockings
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.v4victor.core.dto.CompanyProfile
 import com.v4victor.core.formatPrice
+import com.v4victor.stocks.R
 import com.v4victor.stocks.databinding.ListItemBinding
 
 class StockingsAdapter(
