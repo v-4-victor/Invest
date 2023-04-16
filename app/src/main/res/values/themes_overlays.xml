@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.Mat3.Overlay" parent="ThemeOverlay.Material3.DynamicColors.Light">
-<!--        <item name="colorSurface">@color/material_dynamic_secondary90</item>-->
+        <item name="colorSurface">@color/blue_dark</item>
+        <item name="android:statusBarColor">@color/material_dynamic_secondary95</item>
 
     </style>
 </resources>

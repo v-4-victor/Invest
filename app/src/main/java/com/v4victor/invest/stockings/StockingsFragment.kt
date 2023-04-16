@@ -39,7 +39,7 @@ class StockingsFragment : Fragment() {
         mIth = ItemTouchHelper(
             object : ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP or ItemTouchHelper.DOWN,
-                ItemTouchHelper.LEFT
+                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
             ) {
                 override fun onMove(
                     recyclerView: RecyclerView,

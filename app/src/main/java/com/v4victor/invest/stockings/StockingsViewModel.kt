@@ -39,8 +39,8 @@ class StockingsViewModel @Inject constructor(
             stocksLiveList.value?.let { stockList ->
                 if (stockList.isEmpty())
                     repository.getCompanies()
-                        .let {
-                            stockList.addAll(it.ifEmpty {
+                        .let { repositoryList ->
+                            stockList.addAll(repositoryList.ifEmpty {
                                 withContext(Dispatchers.Default)
                                 {
                                     repository.insertAll(defaultStocksList)

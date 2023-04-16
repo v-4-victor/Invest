@@ -1,23 +1,18 @@
 package com.v4victor.network
 
 
-
 import com.v4victor.core.BASE_URL
 import com.v4victor.core.TOKEN
 import com.v4victor.core.dto.Chart
 import com.v4victor.core.dto.News
 import com.v4victor.core.dto.PriceInfo
 import com.v4victor.core.dto.SearchInfo
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-
-
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(GsonConverterFactory.create())
-    .baseUrl(BASE_URL)
-    .build()
 
 
 data class Response(val result: List<SearchInfo>)
@@ -59,6 +54,22 @@ interface ApiService {
         @Query("token") token: String = TOKEN
     ): Response
 }
+
+val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+    level = HttpLoggingInterceptor.Level.BODY
+}
+
+val client: OkHttpClient by lazy {
+    OkHttpClient.Builder().apply {
+        addInterceptor(interceptor)
+    }.build()
+}
+
+private val retrofit = Retrofit.Builder()
+    .addConverterFactory(GsonConverterFactory.create())
+    .client(client)
+    .baseUrl(BASE_URL)
+    .build()
 
 
 object StocksApi {

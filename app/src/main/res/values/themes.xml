@@ -16,9 +16,25 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Investing" parent="Theme.Material3.Light.NoActionBar">
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:statusBarColor">?attr/colorSecondaryContainer</item>
-        <item name="colorSurface">@color/material_dynamic_secondary60</item>
+    <!--    <style name="Theme.Investing" parent="Theme.Material3.Light.NoActionBar">-->
+    <!--        <item name="android:windowLightStatusBar">false</item>-->
+    <!--        <item name="android:statusBarColor">?attr/colorSecondaryContainer</item>-->
+    <!--        <item name="colorSurface">@color/material_dynamic_secondary60</item>-->
+    <!--    </style>-->
+
+    <style name="NightAdjusted.Theme.Invest" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
     </style>
+
+    <!-- Allows us to override platform level specific attributes in their
+         respective values-vXX folder. -->
+    <style name="PlatformAdjusted.Theme.Invest" parent="NightAdjusted.Theme.Invest">
+        <item name="android:statusBarColor">?attr/colorSecondaryContainer</item>
+    </style>
+
+    <!-- The final theme we use -->
+    <style name="Theme.Invest" parent="PlatformAdjusted.Theme.Invest" />
+
+
 </resources>

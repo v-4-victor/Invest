@@ -6,4 +6,11 @@
         android:icon="@drawable/search"
         android:title="@string/search"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/favourite"
+        android:icon="@drawable/star_list_no_focus"
+        android:title="@string/favourite"
+        android:checkable="true"
+        android:checked="false"
+        app:showAsAction="ifRoom" />
 </menu>

@@ -33,8 +33,10 @@ class ChartFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = ChartFragmentBinding.inflate(inflater)
+
         company = stringHolder.data
         Log.d("Chart", company)
+
         viewModel = ViewModelProvider(this)[ChartViewModel::class.java]
         viewModel.properties.observe(viewLifecycleOwner)
         {

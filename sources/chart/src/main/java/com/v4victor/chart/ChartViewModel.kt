@@ -59,7 +59,6 @@ class ChartViewModel : ViewModel() {
                 "Y" to "M"
             )
             _status.value = ApiStatus.LOADING
-            _response.value = "fds"
             try {
                 val list = StocksApi.retrofitService.getCandles(
                     company,
@@ -68,6 +67,7 @@ class ChartViewModel : ViewModel() {
                     toDate
                 )
                 _properties.value = list
+                Log.d(TAG, list.toString())
                 _response.value = "Success: Data retrieved"
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
@@ -77,5 +77,6 @@ class ChartViewModel : ViewModel() {
 
         }
 
+    private val TAG = "ChartViewModel"
     private fun Calendar.unixTime() = this.timeInMillis / 1000L
 }

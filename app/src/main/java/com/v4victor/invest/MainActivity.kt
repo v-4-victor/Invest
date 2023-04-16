@@ -26,6 +26,13 @@ class MainActivity : AppCompatActivity() {
                     .navigate(R.id.action_stockingsFragment_to_searchFragment)
                 return@setOnMenuItemClickListener true
             }
+            if (it.itemId == R.id.favourite) {
+                it.isChecked = !it.isChecked
+                val icon =
+                    if (it.isChecked) R.drawable.star_list_focus else R.drawable.star_list_no_focus
+                it.setIcon(icon)
+                return@setOnMenuItemClickListener true
+            }
             false
         }
         setContentView(view)

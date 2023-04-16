@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.v4victor.core.dto.CompanyProfile
+import com.v4victor.core.formatPrice
 import com.v4victor.invest.R
 import com.v4victor.invest.databinding.ListItemBinding
 
@@ -15,7 +16,7 @@ class StockingsAdapter(
     private val onClickListener: OnClickListener
 ) : ListAdapter<CompanyProfile, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
     class ViewHolder private constructor(
-         val binding: ListItemBinding,
+        val binding: ListItemBinding,
         private val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
@@ -26,13 +27,13 @@ class StockingsAdapter(
                 .error(R.drawable.ic_broken)
                 .into(binding.imageView)
             binding.symbol.text = item.symbol
-            binding.currentPrice.text = item.currentPrice.toString()
+            binding.currentPrice.text = item.currentPrice.formatPrice()
             binding.description.text = item.description
-            binding.openPrice.text = item.openPrice.toString()
+            binding.openPrice.text = item.openPrice.formatPrice()
         }
 
-        fun updatePrice(price: String) {
-            binding.currentPrice.text = price
+        fun updatePrice(price: Double) {
+            binding.currentPrice.text = price.formatPrice()
         }
 
         companion object {
@@ -59,7 +60,7 @@ class StockingsAdapter(
             super.onBindViewHolder(holder, position, payloads)
         } else {
             if (payloads[0] is Double) {
-                (holder as ViewHolder).updatePrice(payloads[0].toString())
+                (holder as ViewHolder).updatePrice(payloads[0] as Double)
             }
         }
     }
@@ -77,11 +78,17 @@ class StockingsAdapter(
     companion object {
 
         private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<CompanyProfile>() {
-            override fun areItemsTheSame(oldItem: CompanyProfile, newItem: CompanyProfile): Boolean {
+            override fun areItemsTheSame(
+                oldItem: CompanyProfile,
+                newItem: CompanyProfile
+            ): Boolean {
                 return oldItem.symbol == newItem.symbol
             }
 
-            override fun areContentsTheSame(oldItem: CompanyProfile, newItem: CompanyProfile): Boolean {
+            override fun areContentsTheSame(
+                oldItem: CompanyProfile,
+                newItem: CompanyProfile
+            ): Boolean {
                 return oldItem.currentPrice == newItem.currentPrice
             }
 
@@ -96,3 +103,4 @@ class StockingsAdapter(
     }
 
 }
+

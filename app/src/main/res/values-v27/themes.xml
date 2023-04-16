@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<!--    <style name="PlatformAdjusted.Theme.Investing" parent="NightAdjusted.Theme.Invest">-->
-<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+    <style name="PlatformAdjusted.Theme.Invest" parent="NightAdjusted.Theme.Invest">
+        <item name="android:statusBarColor">?attr/colorSecondaryContainer</item>
 <!--        <item name="android:navigationBarColor">@android:color/transparent</item>-->
-<!--    </style>-->
+    </style>
 </resources>

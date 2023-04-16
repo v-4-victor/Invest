@@ -38,4 +38,6 @@ dependencies {
     // Retrofit2
     implementation("com.squareup.retrofit2:retrofit:$retrofit")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit")
+    //Logging Network Calls
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
 }
