@@ -5,7 +5,8 @@ import com.v4victor.core.dto.CompanyProfile
 
 class StockList(private val list: MutableList<CompanyProfile> = mutableListOf()) {
     private val map = mutableMapOf<String, Int>()
-    private val sortOrder = SortOrder.ASCENDING
+    var sortOrder = SortOrder.ASCENDING
+        private set
 
     val _list: List<CompanyProfile> = list
     val _map: Map<String, Int> = map
@@ -38,6 +39,11 @@ class StockList(private val list: MutableList<CompanyProfile> = mutableListOf())
 
     fun getProfile(symbol: String) = if (map[symbol] != null)
         list[map[symbol]!!] else null
+
+    fun changeSortOrder(order: SortOrder) {
+        sortOrder = order
+        sortCompanyProfileList()
+    }
 
     private fun sortCompanyProfileList() {
         when (sortOrder) {

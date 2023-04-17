@@ -54,6 +54,7 @@ class ViewHolder private constructor(val binding: NewsCardBinding, val context: 
             val openLinkIntent = Intent(Intent.ACTION_VIEW, address)
             startActivity(context,openLinkIntent,null)
         }
+        binding.headline.text = item.headline
         //binding.executePendingBindings()
     }
 

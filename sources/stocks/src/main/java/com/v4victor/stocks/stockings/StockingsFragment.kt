@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.v4victor.core.StockList.SortOrder
 import com.v4victor.core.dto.CompanyProfileHolder
 import com.v4victor.core.updateValue
 import com.v4victor.stocks.NavigateStocks
@@ -25,7 +26,7 @@ class StockingsFragment : Fragment() {
     @Inject
     lateinit var navigator: NavigateStocks
 
-
+    private var sortOrder = SortOrder.ASCENDING
     private val viewModel by viewModels<StockingsViewModel>()
     private var favourite = false
     private lateinit var mIth: ItemTouchHelper
@@ -69,25 +70,44 @@ class StockingsFragment : Fragment() {
             if (!favourite)
                 adapter.submitList(it._list.map { item -> item.copy() })
             else
-                adapter.submitList(it._list.filter { item -> item.favourite }.map { item -> item.copy() })
+                adapter.submitList(it._list.filter { item -> item.favourite }
+                    .map { item -> item.copy() })
 
         }
         viewModel.updateStocks()
 
         binding.materialToolbar.setOnMenuItemClickListener {
-            if (it.itemId == R.id.search) {
-                navigator.navigateToSearch()
-                return@setOnMenuItemClickListener true
+            when (it.itemId) {
+                R.id.search -> {
+                    navigator.navigateToSearch()
+                    true
+                }
+
+                R.id.favourite -> {
+                    favourite = !favourite
+                    val icon =
+                        if (favourite) R.drawable.star_icon else R.drawable.star_no_item
+                    it.setIcon(icon)
+                    viewModel.stocksLiveList.updateValue()
+                    true
+                }
+
+                R.id.sort -> {
+                    sortOrder =
+                        when (sortOrder) {
+                            SortOrder.ASCENDING -> SortOrder.DESCENDING
+                            SortOrder.DESCENDING -> SortOrder.ASCENDING
+                            SortOrder.DATE -> SortOrder.DATE
+                        }
+                    viewModel.stocksLiveList.value?.changeSortOrder(sortOrder)
+                    viewModel.stocksLiveList.updateValue()
+                    true
+                }
+
+                else -> false
             }
-            if (it.itemId == R.id.favourite) {
-                favourite = !favourite
-                val icon =
-                    if (favourite) R.drawable.star_list_focus else R.drawable.star_list_no_focus
-                it.setIcon(icon)
-                viewModel.stocksLiveList.updateValue()
-                return@setOnMenuItemClickListener true
-            }
-            false
+
+
         }
         return binding.root
     }

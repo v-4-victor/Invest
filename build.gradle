@@ -29,4 +29,7 @@ ext {
     lifecycleRuntimeKtxVersion = '2.6.1'
     chartVersion = 'v3.1.0'
     okHttpVersion = '4.10.0'
+    kaspressoVersion = '1.4.1'
+    junitAndroidVersion = '1.1.5'
+    espressoVersion = '3.5.1'
 }

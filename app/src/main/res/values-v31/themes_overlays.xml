@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Theme.Mat3.Overlay" parent="ThemeOverlay.Material3.DynamicColors.DayNight">
-<!--        <item name="iconColor">@android:color/system_accent2_600</item>-->
+        <item name="iconColor">@android:color/system_accent1_400</item>
         <item name="colorSurface">@color/material_dynamic_secondary95</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>

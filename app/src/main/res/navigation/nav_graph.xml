@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/nav_graph"
-    app:startDestination="@id/stockingsFragment">
+    app:startDestination="@id/stocks_list">
 
     <fragment
-        android:id="@+id/stockingsFragment"
+        android:id="@+id/stocks_list"
         android:name="com.v4victor.stocks.stockings.StockingsFragment"
         android:label="StockingsFragment"
         tools:layout="@layout/stocks_fragment">
@@ -27,7 +27,7 @@
         tools:layout="@layout/search_layout">
         <action
             android:id="@+id/action_searchFragment_to_stockingsFragment"
-            app:destination="@id/stockingsFragment"
+            app:destination="@id/stocks_list"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
 
@@ -39,5 +39,14 @@
         android:label="ChartFragment"
         tools:layout="@layout/chart_fragment">
 
+    </fragment>
+    <fragment
+        android:id="@+id/news_list"
+        android:name="com.v4victor.stocks.news.NewsFragment"
+        android:label="NewsFragment"
+        tools:layout="@layout/news_fragment">
+        <action
+            android:id="@+id/action_news_list_to_chartFragment"
+            app:destination="@id/chartFragment" />
     </fragment>
 </navigation>
