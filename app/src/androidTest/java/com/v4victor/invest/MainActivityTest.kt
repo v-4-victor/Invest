@@ -1,88 +1,65 @@
 package com.v4victor.invest
 
 
+import android.Manifest
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
-import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.LargeTest
+import androidx.test.ext.junit.rules.activityScenarioRule
+import androidx.test.rule.GrantPermissionRule
+import com.kaspersky.components.alluresupport.addAllureSupport
+import com.kaspersky.components.alluresupport.files.attachViewHierarchyToAllureReport
+import com.kaspersky.kaspresso.interceptors.watcher.testcase.TestRunWatcherInterceptor
+import com.kaspersky.kaspresso.kaspresso.Kaspresso
+import com.kaspersky.kaspresso.params.ScreenshotParams
+import com.kaspersky.kaspresso.params.VideoParams
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import com.kaspersky.kaspresso.testcases.models.info.TestInfo
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
-import org.hamcrest.Matchers.`is`
 import org.hamcrest.TypeSafeMatcher
-import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@LargeTest
-@RunWith(AndroidJUnit4::class)
-class MainActivityTest {
 
-    @Rule
-    @JvmField
-    var mActivityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
+class MainActivityTest : TestCase(
+    kaspressoBuilder = Kaspresso.Builder.simple(
+        customize = {
+            videoParams = VideoParams(bitRate = 10_000_000)
+            screenshotParams = ScreenshotParams(quality = 1)
+        }
+    ).addAllureSupport().apply {
+        testRunWatcherInterceptors.apply {
+            add(object : TestRunWatcherInterceptor {
+                override fun onTestFinished(testInfo: TestInfo, success: Boolean) {
+                    viewHierarchyDumper.dumpAndApply("ViewHierarchy") { attachViewHierarchyToAllureReport() }
+                }
+            })
+        }
+    }
+) {
+    @get:Rule
+    val runtimePermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
+
+    @get:Rule
+    val activityRule = activityScenarioRule<MainActivity>()
 
     @Test
-    fun mainActivityTest() {
-        val actionMenuItemView = onView(
-            allOf(
-                withId(R.id.search), withContentDescription("Search"), childAtPosition(
-                    childAtPosition(
-                        withId(R.id.materialToolbar), 1
-                    ), 0
-                ), isDisplayed()
-            )
-        )
-        actionMenuItemView.perform(click())
+    fun mainActivityTest() = run {
+        step("Launch the app") {
 
-//        val appCompatEditText = onView(
-//            allOf(
-//                withId(R.id.editTextTextPersonName), childAtPosition(
-//                    childAtPosition(
-//                        withId(R.id.linear), 0
-//                    ), 0
-//                ), isDisplayed()
-//            )
-//        )
-//        appCompatEditText.perform(replaceText("MSFT"), closeSoftKeyboard())
-//
-//        val appCompatEditText2 = onView(
-//            allOf(
-//                withId(R.id.editTextTextPersonName), withText("MSFT"), childAtPosition(
-//                    childAtPosition(
-//                        withId(R.id.linear), 0
-//                    ), 0
-//                ), isDisplayed()
-//            )
-//        )
-//        appCompatEditText2.perform(pressImeActionButton())
-//
-//        val recyclerView = onView(
-//            allOf(
-//                withId(R.id.recyclerTickers), childAtPosition(
-//                    withClassName(`is`("androidx.constraintlayout.widget.ConstraintLayout")), 1
-//                )
-//            )
-//        )
-//        recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
-//
-//        val textView = onView(
-//            allOf(
-//                withId(R.id.symbol),
-//                withText("MSFT"),
-//                withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
-//                isDisplayed()
-//            )
-//        )
-//        textView.check(matches(withText("MSFT")))
+            MainScreen {
+                bottomNavigation.setSelectedItem(R.id.news_list)
+//                Thread.sleep(10 * 1000)
+            }
+        }
     }
 
     private fun childAtPosition(

@@ -78,7 +78,7 @@ class StockingsFragment : Fragment() {
 
         binding.materialToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.search -> {
+                R.id.searchStock -> {
                     navigator.navigateToSearch()
                     true
                 }
@@ -86,7 +86,7 @@ class StockingsFragment : Fragment() {
                 R.id.favourite -> {
                     favourite = !favourite
                     val icon =
-                        if (favourite) R.drawable.star_icon else R.drawable.star_no_item
+                        if (favourite) R.drawable.star_sort else R.drawable.star_no_item
                     it.setIcon(icon)
                     viewModel.stocksLiveList.updateValue()
                     true

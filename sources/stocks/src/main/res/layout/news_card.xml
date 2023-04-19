@@ -44,7 +44,7 @@
             style="@style/Widget.AppCompat.TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:alpha="@dimen/material_emphasis_medium"
+            android:alpha="@dimen/material_emphasis_high_type"
             android:fontFamily="@font/roboto"
 
             android:text="lorem ipsum"

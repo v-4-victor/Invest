@@ -12,7 +12,8 @@ class SearchViewModel : ViewModel() {
     enum class ApiStatus { LOADING, ERROR, DONE }
 
     private val _status = MutableLiveData<ApiStatus>()
-
+    val status: LiveData<ApiStatus>
+        get() = _status
 
     // The internal MutableLiveData String that stores the most recent response
     private val _response = MutableLiveData<String>()

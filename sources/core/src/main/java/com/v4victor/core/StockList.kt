@@ -32,11 +32,12 @@ class StockList(private val list: MutableList<CompanyProfile> = mutableListOf())
     }
 
     fun updateStock(ticket: String, price: Double) {
-        Log.d(TAG, "Thread: " + Thread.currentThread().name)
+//        Log.d(TAG, "Thread: " + Thread.currentThread().name)
         if (map[ticket] != null)
             list[map[ticket]!!].currentPrice = price
     }
-
+    operator fun get(symbol: String) = if (map[symbol] != null)
+        list[map[symbol]!!] else null
     fun getProfile(symbol: String) = if (map[symbol] != null)
         list[map[symbol]!!] else null
 

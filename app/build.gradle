@@ -18,7 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "io.qameta.allure.android.runners.AllureAndroidJUnitRunner"
     }
 
     buildTypes {
@@ -54,17 +54,18 @@ dependencies {
     implementation(project(":sources:network"))
     implementation(project(":sources:chart"))
     implementation(project(":sources:stocks"))
-
     //Core
     implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
 
     //Test
-    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$junitAndroidVersion"
+    androidTestImplementation "androidx.test.ext:junit-ktx:$junitAndroidVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+
     androidTestImplementation "com.kaspersky.android-components:kaspresso:$kaspressoVersion"
     androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:$kaspressoVersion"
     //UI

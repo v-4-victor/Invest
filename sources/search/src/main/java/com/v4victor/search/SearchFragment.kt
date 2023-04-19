@@ -35,7 +35,21 @@ class SearchFragment : Fragment() {
             adapter.submitList(it)
             binder.recyclerTickers.scrollToPosition(0)
         }
-
+        viewModel.status.observe(viewLifecycleOwner)
+        {
+            if (it == SearchViewModel.ApiStatus.LOADING) {
+                binder.progressBar.visibility = View.VISIBLE
+                binder.recyclerTickers.visibility = View.INVISIBLE
+            }
+            if (it == SearchViewModel.ApiStatus.DONE) {
+                binder.progressBar.visibility = View.INVISIBLE
+                binder.recyclerTickers.visibility = View.VISIBLE
+            }
+            if (it == SearchViewModel.ApiStatus.ERROR) {
+                binder.progressBar.visibility = View.INVISIBLE
+                binder.recyclerTickers.visibility = View.INVISIBLE
+            }
+        }
         binder.editTextTextPersonName.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_GO) {
                 updateRepoListFromInput()
@@ -45,13 +59,17 @@ class SearchFragment : Fragment() {
             }
         }
 
-        binder.editTextTextPersonName.setOnKeyListener { _, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                updateRepoListFromInput()
-                true
-            } else {
-                false
-            }
+//        binder.editTextTextPersonName.setOnKeyListener { _, keyCode, event ->
+//            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+//                updateRepoListFromInput()
+//                true
+//            } else {
+//                false
+//            }
+//        }
+        binder.floatingActionButton.setOnClickListener {
+            updateRepoListFromInput()
+
         }
         return binder.root
     }

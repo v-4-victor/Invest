@@ -16,7 +16,7 @@ ext {
     junitVersion = '1.1.5'
     junitAndroidVersion = junitVersion
     junitVersion = '4.13.2'
-    materialVersion = '1.8.0'
+    materialVersion = '1.9.0-rc01'
     navigationFragmentKtxVersion = '2.5.3'
     navigationUiKtxVersion = '2.5.3'
     kotlinSerialization = '1.5.0'
