@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stocks"
+    app:startDestination="@id/stocks_list">
+    <fragment
+        android:id="@+id/stocks_list"
+        android:name="com.v4victor.stocks.stockings.StockingsFragment"
+        android:label="StockingsFragment"
+        tools:layout="@layout/stocks_fragment">
+        <action
+            android:id="@+id/action_stockingsFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_stockingsFragment_to_chartFragment"
+            app:destination="@id/chartFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.v4victor.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/search_layout">
+        <action
+            android:id="@+id/action_searchFragment_to_stockingsFragment"
+            app:destination="@id/stocks_list"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/chartFragment"
+        android:name="com.v4victor.chart.ChartFragment"
+        android:label="ChartFragment"
+        tools:layout="@layout/chart_fragment">
+
+    </fragment>
+</navigation>

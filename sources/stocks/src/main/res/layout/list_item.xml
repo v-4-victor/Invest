@@ -20,6 +20,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -30,7 +31,16 @@
                 android:layout_height="80dp"
                 android:contentDescription="@string/app_name"
                 tools:srcCompat="@tools:sample/avatars" />
+
         </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/star_icon" />
 
         <TextView
             android:id="@+id/symbol"
@@ -49,7 +59,7 @@
             app:layout_constraintStart_toEndOf="@+id/imageCard"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="BINANCE:BTCUSDT" />
+            tools:text="BINANCE" />
 
         <TextView
             android:id="@+id/description"
@@ -60,13 +70,12 @@
             android:layout_marginBottom="16dp"
             android:alpha="@dimen/material_emphasis_medium"
             android:fontFamily="@font/roboto"
-            android:maxLines="1"
+
             android:textColor="?attr/colorOnSurface"
             android:textSize="20sp"
+            android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/openPrice"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageCard"
             app:layout_constraintStart_toStartOf="@+id/symbol"
             app:layout_constraintTop_toBottomOf="@+id/symbol"
             tools:text="AMAZON.COM INC" />

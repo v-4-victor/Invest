@@ -7,8 +7,8 @@
         android:title="@string/stocks"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/favourite_list"
-        android:icon="@drawable/star_list_no_focus"
-        android:title="@string/favourite"
+        android:id="@+id/news"
+        android:icon="@drawable/news_icon"
+        android:title="@string/news"
         app:showAsAction="ifRoom" />
 </menu>

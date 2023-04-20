@@ -30,9 +30,15 @@ data class CompanyProfile(
     )
 
     operator fun plusAssign(priceInfo: PriceInfo) {
-        Log.d("Price", priceInfo.toString())
+//        Log.d("Price", priceInfo.toString())
         openPrice = priceInfo.openPrice
         currentPrice = priceInfo.currentPrice
+    }
+    operator fun plus(priceInfo: PriceInfo):CompanyProfile {
+//        Log.d("Price", priceInfo.toString())
+        openPrice = priceInfo.openPrice
+        currentPrice = priceInfo.currentPrice
+        return this
     }
 }
 

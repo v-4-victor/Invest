@@ -1,4 +1,4 @@
-package com.v4victor.core
+package com.v4victor.stocks
 
 import org.junit.Test
 

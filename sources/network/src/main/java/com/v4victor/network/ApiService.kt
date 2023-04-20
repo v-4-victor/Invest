@@ -32,10 +32,16 @@ interface ApiService {
     ): PriceInfo
 
     @GET("company-news")
-    suspend fun getNews(
+    suspend fun getCompanyNews(
         @Query("symbol") symbol: String,
         @Query("from") fromDate: String,
         @Query("to") toDate: String,
+        @Query("token") token: String = TOKEN
+    ): List<News>
+
+    @GET("news")
+    suspend fun getNews(
+        @Query("category") category: String = "general",
         @Query("token") token: String = TOKEN
     ): List<News>
 

@@ -1,17 +1,13 @@
 package com.v4victor.invest.di
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.findNavController
 import com.v4victor.core.StockList
-import com.v4victor.core.db.Repository
-import com.v4victor.core.dto.CompanyProfile
-import com.v4victor.invest.MainActivity
-import com.v4victor.invest.R
-import com.v4victor.invest.navigation.NavigateToStocksFragmentImpl
-import com.v4victor.search.NavigateToStocksFragment
-import dagger.Binds
+import com.v4victor.core.db.StocksRepository
+import com.v4victor.invest.navigation.NavigateStocksImpl
+import com.v4victor.invest.navigation.NavigateSearchImpl
+import com.v4victor.search.NavigateSearch
+import com.v4victor.stocks.NavigateStocks
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,12 +18,19 @@ import dagger.hilt.android.components.FragmentComponent
 object FragmentModule {
 
     @Provides
-    fun provideNavigation(
+    fun provideNavigationToStocks(
         activity: Activity,
-        repository: Repository,
+        stocksRepository: StocksRepository,
         stockList: MutableLiveData<StockList>
-    ): NavigateToStocksFragment {
-        return NavigateToStocksFragmentImpl(activity, repository, stockList)
+    ): NavigateSearch {
+        return NavigateSearchImpl(activity, stocksRepository, stockList)
+    }
+
+    @Provides
+    fun provideNavigationToChart(
+        activity: Activity
+    ): NavigateStocks {
+        return NavigateStocksImpl(activity)
     }
 
 }

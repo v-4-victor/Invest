@@ -20,6 +20,9 @@ interface CompanyDao {
 
     @Query("delete from CompanyProfile")
     fun clear()
+
+    @Update
+    fun updateAll(profiles: List<CompanyProfile>)
 }
 
 

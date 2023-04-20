@@ -5,7 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 
-class Repository(database: CompanyDB) {
+class StocksRepository(database: CompanyDB) {
 
     private val dao = database.companyDao
 
@@ -14,11 +14,13 @@ class Repository(database: CompanyDB) {
             dao.insertAll(listCompany)
         }
     }
+
     suspend fun insert(company: CompanyProfile) {
         withContext(Dispatchers.IO) {
             dao.insert(company)
         }
     }
+
     suspend fun delete(symbol: String) {
         withContext(Dispatchers.IO) {
             dao.clear(symbol)
@@ -32,6 +34,15 @@ class Repository(database: CompanyDB) {
         }
     }
 
-    suspend fun getCompanies() = dao.getCompanies()
+    suspend fun updateAll(profiles: List<CompanyProfile>) {
+        withContext(Dispatchers.IO)
+        {
+            dao.updateAll(profiles)
+        }
+    }
+
+    suspend fun getCompanies() = withContext(Dispatchers.IO) {
+        dao.getCompanies()
+    }
 
 }

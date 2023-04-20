@@ -19,23 +19,37 @@ class SearchFragment : Fragment() {
     private lateinit var binder: SearchLayoutBinding
 
     @Inject
-    lateinit var navigator: NavigateToStocksFragment
+    lateinit var navigator: NavigateSearch
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binder = SearchLayoutBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-        viewModel.getTickets("")
+//        viewModel.getTickets("")
         adapter = SearchAdapter(navigator)
         binder.recyclerTickers.adapter = adapter
 
-        viewModel.properties.observe(viewLifecycleOwner)
+        viewModel.companies.observe(viewLifecycleOwner)
         {
             adapter.submitList(it)
             binder.recyclerTickers.scrollToPosition(0)
         }
-
+        viewModel.status.observe(viewLifecycleOwner)
+        {
+            if (it == SearchViewModel.ApiStatus.LOADING) {
+                binder.progressBar.visibility = View.VISIBLE
+                binder.recyclerTickers.visibility = View.INVISIBLE
+            }
+            if (it == SearchViewModel.ApiStatus.DONE) {
+                binder.progressBar.visibility = View.INVISIBLE
+                binder.recyclerTickers.visibility = View.VISIBLE
+            }
+            if (it == SearchViewModel.ApiStatus.ERROR) {
+                binder.progressBar.visibility = View.INVISIBLE
+                binder.recyclerTickers.visibility = View.INVISIBLE
+            }
+        }
         binder.editTextTextPersonName.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_GO) {
                 updateRepoListFromInput()
@@ -45,13 +59,17 @@ class SearchFragment : Fragment() {
             }
         }
 
-        binder.editTextTextPersonName.setOnKeyListener { _, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                updateRepoListFromInput()
-                true
-            } else {
-                false
-            }
+//        binder.editTextTextPersonName.setOnKeyListener { _, keyCode, event ->
+//            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+//                updateRepoListFromInput()
+//                true
+//            } else {
+//                false
+//            }
+//        }
+        binder.floatingActionButton.setOnClickListener {
+            updateRepoListFromInput()
+
         }
         return binder.root
     }
