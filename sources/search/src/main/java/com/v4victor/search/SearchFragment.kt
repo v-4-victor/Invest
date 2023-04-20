@@ -26,11 +26,11 @@ class SearchFragment : Fragment() {
     ): View {
         binder = SearchLayoutBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-        viewModel.getTickets("")
+//        viewModel.getTickets("")
         adapter = SearchAdapter(navigator)
         binder.recyclerTickers.adapter = adapter
 
-        viewModel.properties.observe(viewLifecycleOwner)
+        viewModel.companies.observe(viewLifecycleOwner)
         {
             adapter.submitList(it)
             binder.recyclerTickers.scrollToPosition(0)

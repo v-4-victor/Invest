@@ -55,6 +55,7 @@ dependencies {
     //KotlinX Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinSerialization")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit")
-
+    //DI
+    implementation "com.google.dagger:hilt-android:$hiltAndroidVersion"
 
 }

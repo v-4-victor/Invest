@@ -26,9 +26,11 @@ class StockList(private val list: MutableList<CompanyProfile> = mutableListOf())
         return list.isEmpty()
     }
 
-    operator fun plusAssign(CompanyProfile: CompanyProfile) {
-        list.add(CompanyProfile)
-        sortCompanyProfileList()
+    operator fun plusAssign(companyProfile: CompanyProfile) {
+        if (map[companyProfile.symbol] == null) {
+            list.add(companyProfile)
+            sortCompanyProfileList()
+        }
     }
 
     fun updateStock(ticket: String, price: Double) {

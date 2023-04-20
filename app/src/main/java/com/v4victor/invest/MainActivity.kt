@@ -29,33 +29,11 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bottomNavigationView.setupWithNavController(navController)
+
         val color = SurfaceColors.SURFACE_2.getColor(this)
         window.statusBarColor = color // Set color of system statusBar same as ActionBar
         window.navigationBarColor = color // Set color of system navigationBar same as BottomNavigationView
-//        binding.bottomNavigationView.set
-//        binding.bottomNavigationView.setOnItemSelectedListener {
-//            when (it.itemId) {
-//                R.id.stocks_list -> {
-//                    iconFocus = !iconFocus
-//                    true
-//                }
-//
-//                R.id.news_list -> {
-//                    iconFocus = !iconFocus
-//                    val icon =
-//                        if (iconFocus) R.drawable.star_list_focus else R.drawable.star_list_no_focus
-//                    it.setIcon(icon)
-//                    true
-//                }
-//
-//                else -> false
-//            }
-//        }
+
     }
 
-
-//    override fun navigate(ticket: SearchInfo) {
-//        findNavController(R.id.nav_host_fragment)
-//        navHost.findNavController().navigate(R.id.action_searchFragment_to_stockingsFragment)
-//    }
 }

@@ -20,9 +20,9 @@ class NewsFragment : Fragment() {
         binder = NewsFragmentBinding.inflate(inflater)
         binder.textError.visibility = View.INVISIBLE
         viewModel = ViewModelProvider(this)[NewsViewModel::class.java]
-        viewModel.getMarsRealEstateProperties(company)
+        viewModel.getNews(company)
         binder.recyclerView.adapter = adapter
-        viewModel.properties.observe(viewLifecycleOwner)
+        viewModel.news.observe(viewLifecycleOwner)
         {
             adapter.submitList(it)
         }
