@@ -2,7 +2,7 @@ package com.v4victor.invest.di
 
 import android.content.Context
 import com.v4victor.core.StockList
-import com.v4victor.core.db.Repository
+import com.v4victor.core.db.StocksRepository
 import com.v4victor.core.db.getDatabase
 import dagger.Module
 import dagger.Provides
@@ -22,7 +22,7 @@ class AppModule {
     }
     @Singleton
     @Provides
-    fun provideRepository(@ApplicationContext context: Context): Repository {
-       return Repository(getDatabase(context))
+    fun provideRepository(@ApplicationContext context: Context): StocksRepository {
+       return StocksRepository(getDatabase(context))
     }
 }

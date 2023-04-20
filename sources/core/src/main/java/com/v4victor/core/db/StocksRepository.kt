@@ -5,7 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 
-class Repository(database: CompanyDB) {
+class StocksRepository(database: CompanyDB) {
 
     private val dao = database.companyDao
 
@@ -41,6 +41,8 @@ class Repository(database: CompanyDB) {
         }
     }
 
-    suspend fun getCompanies() = dao.getCompanies()
+    suspend fun getCompanies() = withContext(Dispatchers.IO) {
+        dao.getCompanies()
+    }
 
 }

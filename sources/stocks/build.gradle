@@ -60,4 +60,8 @@ dependencies {
     //DI
     implementation "com.google.dagger:hilt-android:$hiltAndroidVersion"
     kapt "com.google.dagger:hilt-compiler:$hiltAndroidVersion"
+
+    //Testing
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "androidx.test.ext:junit:$junitAndroidVersion"
 }

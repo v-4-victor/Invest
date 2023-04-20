@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.v4victor.core.StockList
-import com.v4victor.core.db.Repository
+import com.v4victor.core.db.StocksRepository
 import com.v4victor.core.dto.CompanyProfile
 import com.v4victor.core.dto.SearchInfo
 import com.v4victor.core.updateValue
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 class NavigateSearchImpl @Inject constructor(
     private val activity: Activity,
-    private val repository: Repository,
+    private val stocksRepository: StocksRepository,
     private val companyList: MutableLiveData<StockList>
 ) : NavigateSearch {
     override fun navigateToStocks(ticket: SearchInfo) {
@@ -31,7 +31,7 @@ class NavigateSearchImpl @Inject constructor(
                 val stock = CompanyProfile(ticket)
                 stock += StocksApi.retrofitService.getPrice(ticket.symbol)
                 launch(Dispatchers.IO) {
-                    repository.insert(stock)
+                    stocksRepository.insert(stock)
                 }
                 withContext(Dispatchers.Main)
                 {

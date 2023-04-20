@@ -3,7 +3,7 @@ package com.v4victor.invest.di
 import android.app.Activity
 import androidx.lifecycle.MutableLiveData
 import com.v4victor.core.StockList
-import com.v4victor.core.db.Repository
+import com.v4victor.core.db.StocksRepository
 import com.v4victor.invest.navigation.NavigateStocksImpl
 import com.v4victor.invest.navigation.NavigateSearchImpl
 import com.v4victor.search.NavigateSearch
@@ -20,10 +20,10 @@ object FragmentModule {
     @Provides
     fun provideNavigationToStocks(
         activity: Activity,
-        repository: Repository,
+        stocksRepository: StocksRepository,
         stockList: MutableLiveData<StockList>
     ): NavigateSearch {
-        return NavigateSearchImpl(activity, repository, stockList)
+        return NavigateSearchImpl(activity, stocksRepository, stockList)
     }
 
     @Provides
